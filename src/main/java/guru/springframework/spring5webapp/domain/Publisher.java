@@ -17,9 +17,8 @@ public class Publisher {
     private String state;
     private String zip;
 
-    @ManyToMany
-    @JoinTable(name = "book_publisher", joinColumns = @JoinColumn(name = "publisher_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    @OneToMany
+    @JoinColumn(name = "publisher_id")
     private Set<Book> booksPublished = new HashSet<>();
 
     public Publisher(){
