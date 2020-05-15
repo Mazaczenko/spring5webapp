@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Created by jt on 12/23/19.
+ */
 @Entity
 public class Publisher {
 
@@ -12,25 +15,59 @@ public class Publisher {
     private Long id;
 
     private String name;
-    private String address;
+    private String addressLine1;
     private String city;
     private String state;
     private String zip;
 
     @OneToMany
     @JoinColumn(name = "publisher_id")
-    private Set<Book> booksPublished = new HashSet<>();
+    private Set<Book> books = new HashSet<>();
 
-    public Publisher(){
+    public Publisher() {
     }
 
-    public Publisher(String name, String address, String city, String state, String zip) {
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return "Publisher{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", addressLine1='" + addressLine1 + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip='" + zip + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Publisher publisher = (Publisher) o;
+
+        return id != null ? id.equals(publisher.id) : publisher.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
         this.id = id;
-        this.name = name;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
     }
 
     public String getName() {
@@ -41,12 +78,12 @@ public class Publisher {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getAddressLine1() {
+        return addressLine1;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddressLine1(String addressLine1) {
+        this.addressLine1 = addressLine1;
     }
 
     public String getCity() {
@@ -71,53 +108,5 @@ public class Publisher {
 
     public void setZip(String zip) {
         this.zip = zip;
-    }
-
-    public Set<Book> getBooksPublished() {
-        return booksPublished;
-    }
-
-    public void setBooksPublished(Set<Book> booksPublished) {
-        this.booksPublished = booksPublished;
-    }
-
-    @Override
-    public String toString() {
-        return "Publisher{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", zip='" + zip + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Publisher publisher = (Publisher) o;
-
-        if (id != null ? !id.equals(publisher.id) : publisher.id != null) return false;
-        if (name != null ? !name.equals(publisher.name) : publisher.name != null) return false;
-        if (address != null ? !address.equals(publisher.address) : publisher.address != null) return false;
-        if (city != null ? !city.equals(publisher.city) : publisher.city != null) return false;
-        if (state != null ? !state.equals(publisher.state) : publisher.state != null) return false;
-        if (zip != null ? !zip.equals(publisher.zip) : publisher.zip != null) return false;
-        return booksPublished != null ? booksPublished.equals(publisher.booksPublished) : publisher.booksPublished == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + (state != null ? state.hashCode() : 0);
-        result = 31 * result + (zip != null ? zip.hashCode() : 0);
-        result = 31 * result + (booksPublished != null ? booksPublished.hashCode() : 0);
-        return result;
     }
 }
