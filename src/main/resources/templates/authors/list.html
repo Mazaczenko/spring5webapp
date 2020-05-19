@@ -6,7 +6,7 @@
     <title>Spring Framework Guru</title>
 </head>
 <body>
-<h1>Author List</h1>
+<h1>Authors List</h1>
 
 
 <table>
@@ -16,8 +16,8 @@
         <th>Publisher</th>
     </tr>
     <tr th:each="author : ${authors}">
-        <td th:text="${author.firstName}">firstname</td>
-        <td th:text="${author.lastName}"> lastname</td>
+        <td th:text="${author.firstName}">firstName</td>
+        <td th:text="${author.lastName}"> lastName</td>
         <td th:text="${author.books[0].title}">book title</td>
     </tr>
 </table>
